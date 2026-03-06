@@ -182,7 +182,13 @@ export default function useSettings(props: CiphixNumberInputContainerProps): Cip
         } else {
             setMaxValue(undefined);
         }
-    }, [props.useMaxValue, props.maxValueSource, props.maxValue, props.maxValueAttribute, props.maxValueAttribute?.value]);
+    }, [
+        props.useMaxValue,
+        props.maxValueSource,
+        props.maxValue,
+        props.maxValueAttribute,
+        props.maxValueAttribute?.value
+    ]);
 
     // Set the min value
     useEffect(() => {
@@ -195,7 +201,13 @@ export default function useSettings(props: CiphixNumberInputContainerProps): Cip
         } else {
             setMinValue(undefined);
         }
-    }, [props.useMinValue, props.minValueSource, props.minValue, props.minValueAttribute, props.minValueAttribute?.value]);
+    }, [
+        props.useMinValue,
+        props.minValueSource,
+        props.minValue,
+        props.minValueAttribute,
+        props.minValueAttribute?.value
+    ]);
 
     return {
         numberInput,
