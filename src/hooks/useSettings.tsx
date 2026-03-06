@@ -72,6 +72,8 @@ export default function useSettings(props: CiphixNumberInputContainerProps): Cip
     const [className, setClassName] = useState<string>();
     const [displayType, setDisplayType] = useState<displayTypeEnum>();
     const [disabled, setDisabled] = useState<boolean>();
+    const [maxValue, setMaxValue] = useState<number | undefined>();
+    const [minValue, setMinValue] = useState<number | undefined>();
 
     // Set numberInput based on selected inputType, allows us to continue with a single variable from here on instead of looking at string/integer/decimal-input
     const numberInput: EditableValue =
@@ -94,10 +96,6 @@ export default function useSettings(props: CiphixNumberInputContainerProps): Cip
     // What kind of keyboard suggestion to send to mobile device
     const inputMode: inputModeEnum =
         props.inputType === "integer" || props.decimalPrecision === 0 ? "numeric" : "decimal";
-
-    // Set the min/max value if applicable
-    const maxValue: number | undefined = props.useMaxValue === true ? props.maxValue.toNumber() : undefined;
-    const minValue: number | undefined = props.useMinValue === true ? props.minValue.toNumber() : undefined;
 
     // Set numberInput value
     useEffect(() => {
@@ -172,6 +170,32 @@ export default function useSettings(props: CiphixNumberInputContainerProps): Cip
             }
         }
     }, [numberInput?.readOnly, props.readOnlyStle]);
+
+    // Set the max value
+    useEffect(() => {
+        if (props.useMaxValue) {
+            if (props.maxValueSource === "attribute") {
+                setMaxValue(props.maxValueAttribute?.value?.toNumber());
+            } else {
+                setMaxValue(props.maxValue.toNumber());
+            }
+        } else {
+            setMaxValue(undefined);
+        }
+    }, [props.useMaxValue, props.maxValueSource, props.maxValue, props.maxValueAttribute, props.maxValueAttribute?.value]);
+
+    // Set the min value
+    useEffect(() => {
+        if (props.useMinValue) {
+            if (props.minValueSource === "attribute") {
+                setMinValue(props.minValueAttribute?.value?.toNumber());
+            } else {
+                setMinValue(props.minValue.toNumber());
+            }
+        } else {
+            setMinValue(undefined);
+        }
+    }, [props.useMinValue, props.minValueSource, props.minValue, props.minValueAttribute, props.minValueAttribute?.value]);
 
     return {
         numberInput,

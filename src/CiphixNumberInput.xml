@@ -55,17 +55,51 @@
                     <caption>Set a max value</caption>
                     <description />
                 </property>
+                <property key="maxValueSource" type="enumeration" defaultValue="constant">
+                    <caption>Maximum value source</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="constant">Constant</enumerationValue>
+                        <enumerationValue key="attribute">Attribute</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="maxValue" type="decimal" defaultValue="0.0">
                     <caption>Maximum value</caption>
                     <description>Prevents user from entering a higher value</description>
+                </property>
+                <property key="maxValueAttribute" type="attribute" required="false">
+                    <caption>Maximum value (attribute)</caption>
+                    <description>Attribute containing the maximum value</description>
+                    <attributeTypes>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
                 </property>
                 <property key="useMinValue" type="boolean" defaultValue="false">
                     <caption>Set a min value</caption>
                     <description />
                 </property>
+                <property key="minValueSource" type="enumeration" defaultValue="constant">
+                    <caption>Minimum value source</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="constant">Constant</enumerationValue>
+                        <enumerationValue key="attribute">Attribute</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="minValue" type="decimal" defaultValue="0.0">
                     <caption>Minimum value</caption>
-                    <description>Prevents user from entering a lower value; So don't use positve values here!</description>
+                    <description>Prevents user from entering a lower value</description>
+                </property>
+                <property key="minValueAttribute" type="attribute" required="false">
+                    <caption>Minimum value (attribute)</caption>
+                    <description>Attribute containing the minimum value</description>
+                    <attributeTypes>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
                 </property>
             </propertyGroup>
 

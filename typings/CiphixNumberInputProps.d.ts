@@ -8,6 +8,10 @@ import { Big } from "big.js";
 
 export type InputTypeEnum = "decimal" | "integer" | "string";
 
+export type MaxValueSourceEnum = "constant" | "attribute";
+
+export type MinValueSourceEnum = "constant" | "attribute";
+
 export type ReadOnlyStleEnum = "control" | "text";
 
 export type DecimalModeEnum = "fixed" | "auto";
@@ -33,9 +37,13 @@ export interface CiphixNumberInputContainerProps {
     decimalInput: EditableValue<Big>;
     stringInput: EditableValue<string>;
     useMaxValue: boolean;
+    maxValueSource: MaxValueSourceEnum;
     maxValue: Big;
+    maxValueAttribute?: EditableValue<Big>;
     useMinValue: boolean;
+    minValueSource: MinValueSourceEnum;
     minValue: Big;
+    minValueAttribute?: EditableValue<Big>;
     placeholder?: DynamicValue<string>;
     readOnlyStle: ReadOnlyStleEnum;
     prefix?: DynamicValue<string>;
@@ -65,9 +73,13 @@ export interface CiphixNumberInputPreviewProps {
     decimalInput: string;
     stringInput: string;
     useMaxValue: boolean;
+    maxValueSource: MaxValueSourceEnum;
     maxValue: number | null;
+    maxValueAttribute: string;
     useMinValue: boolean;
+    minValueSource: MinValueSourceEnum;
     minValue: number | null;
+    minValueAttribute: string;
     placeholder: string;
     readOnlyStle: ReadOnlyStleEnum;
     prefix: string;

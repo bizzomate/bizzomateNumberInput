@@ -96,10 +96,19 @@ export function getProperties(values: CiphixNumberInputPreviewProps, defaultProp
     }
 
     if (values.useMaxValue !== true) {
+        hidePropertiesIn(defaultProperties, values, ["maxValueSource", "maxValue", "maxValueAttribute"]);
+    } else if (values.maxValueSource === "attribute") {
         hidePropertyIn(defaultProperties, values, "maxValue");
+    } else {
+        hidePropertyIn(defaultProperties, values, "maxValueAttribute");
     }
+
     if (values.useMinValue !== true) {
+        hidePropertiesIn(defaultProperties, values, ["minValueSource", "minValue", "minValueAttribute"]);
+    } else if (values.minValueSource === "attribute") {
         hidePropertyIn(defaultProperties, values, "minValue");
+    } else {
+        hidePropertyIn(defaultProperties, values, "minValueAttribute");
     }
 
     if (values.decimalSeparatorBehavior !== "custom") {
@@ -123,37 +132,25 @@ export function getProperties(values: CiphixNumberInputPreviewProps, defaultProp
     return defaultProperties;
 }
 
-/*
- export function check(values: BizzomateNumberInputPreviewProps): Problem[] {
-     const errors: Problem[] = [];
-     // Add errors to the above array to throw errors in Studio and Studio Pro.
-     
-    if (values.groupDigits && !values.thousandSeparator){
+export function check(values: CiphixNumberInputPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+
+    if (values.useMaxValue && values.maxValueSource === "attribute" && !values.maxValueAttribute) {
         errors.push({
-            property: "thousandSeparator",
-            message: "Please define the separator"
+            property: "maxValueAttribute",
+            message: "Define the attribute that contains the 'Maximum value'."
         });
     }
 
-    if (values.inputType !== 'integer') {
-        if (!values.decimalSeparator){
-            errors.push({
-                property: "decimalSeparator",
-                message: "Please define the separator"
-            });
-        }
-        if (values.decimalMode === "fixed" && !values.decimalPrecision) {
-            errors.push({
-                property: "decimalPrecision",
-                message: "Please define the precision"
-            });
-        }
+    if (values.useMinValue && values.minValueSource === "attribute" && !values.minValueAttribute) {
+        errors.push({
+            property: "minValueAttribute",
+            message: "Define the attribute that contains the 'Minimum value'."
+        });
     }
 
-    
-     
-     return errors;
- }*/
+    return errors;
+}
 
 export function getPreview(values: CiphixNumberInputPreviewProps, isDarkMode: boolean): PreviewProps {
     // Customize your pluggable widget appearance for Studio Pro.
@@ -205,6 +202,6 @@ export function getPreview(values: CiphixNumberInputPreviewProps, isDarkMode: bo
     };
 }
 
-// export function getCustomCaption(values: BizzomateNumberInputPreviewProps, platform: Platform): string {
-//     return "BizzomateNumberInput";
+// export function getCustomCaption(values: CiphixNumberInputPreviewProps, platform: Platform): string {
+//     return "CiphixNumberInput";
 // }
